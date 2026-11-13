@@ -19,7 +19,8 @@
   @media (min-width:600px){.grid{grid-template-columns:1fr 1fr;}}
   .card{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);
     border-radius:14px;padding:13px 14px;text-decoration:none;color:inherit;transition:.16s;}
-  .card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 6px 18px rgba(47,111,237,.13);}
+  a.card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 6px 18px rgba(47,111,237,.13);}
+  .card.offline{opacity:.62;}
   .ico{flex:0 0 40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;
     font-size:20px;background:linear-gradient(135deg,#e8f0ff,#dbe7ff);}
   @media (prefers-color-scheme: dark){.ico{background:linear-gradient(135deg,#243049,#1d2740);}}
@@ -27,38 +28,43 @@
   .t{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .d{font-size:12px;color:var(--dim);line-height:1.45;overflow:hidden;display:-webkit-box;
     -webkit-line-clamp:2;-webkit-box-orient:vertical;}
-  .badge{flex:0 0 auto;font-size:11px;padding:2px 7px;border-radius:8px;background:#fff3e0;color:#c2410c;}
+  .badge{flex:0 0 auto;font-size:11px;padding:2px 7px;border-radius:8px;background:#fff3e0;color:#c2410c;white-space:nowrap;}
+  .badge.blue{background:#eef3fd;color:#2f6fed;}
+  .badge.grey{background:#f1f2f6;color:#8a90a0;}
   .arrow{flex:0 0 auto;color:var(--dim);font-size:13px;}
-  .card:hover .arrow{color:var(--accent);}
-  footer{margin-top:30px;text-align:center;color:var(--dim);font-size:12px;line-height:1.8;}
+  a.card:hover .arrow{color:var(--accent);}
+  footer{margin-top:30px;text-align:center;color:var(--dim);font-size:12px;line-height:1.9;}
+  footer a{color:var(--accent);text-decoration:none;}
   footer code{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1px 5px;font-size:11px;}
 </style></head><body><div class="wrap">
 <header>
   <h1>eskyhero · 网址集合</h1>
-  <div class="sub">个人小站：应用入口 + 页面预览，全部走华为云 DevBridge 隧道，一个域名家族管到底。</div>
+  <div class="sub">个人小站：应用入口 + 页面预览。静态部分已托管在 GitHub Pages，永久在线；带口令的属于本机服务，主机不在线时打不开。</div>
 </header>
+
 <h2>应用<span class="cnt">2</span></h2>
 <div class="grid">
-<a class="card" href="dsh/" data-url="dsh/">
+<a class="card" href="dsh/">
   <span class="ico">🧠</span>
   <span class="body">
     <span class="t">DSH 控制台</span>
-    <span class="d">DeepSeek Harness 的 Web 控制台，外网可开，需访问口令</span>
+    <span class="d">DeepSeek Harness 的 Web 控制台，跑在自己的机器上，需访问口令</span>
   </span>
-  <span class="badge">需口令</span><span class="arrow">↗</span>
+  <span class="badge blue">说明页</span><span class="arrow">↗</span>
 </a>
-<a class="card" href="https://amhfximg-8300.devbridge-s2.hwtunnel.com/" target="_blank" rel="noopener" data-url="https://amhfximg-8300.devbridge-s2.hwtunnel.com/">
+<div class="card offline">
   <span class="ico">💬</span>
   <span class="body">
     <span class="t">Duet Chat 双 Agent 聊天室</span>
-    <span class="d">OpenClaw 与 DSH 互相聊天，可随时接管任一角色代打</span>
+    <span class="d">OpenClaw 与 DSH 互相聊天，可接管任一角色。仅在主机与隧道在线时可用</span>
   </span>
-  <span class="badge">需口令</span><span class="arrow">↗</span>
-</a>
+  <span class="badge grey">需本机运行</span>
 </div>
+</div>
+
 <h2>页面<span class="cnt">2</span></h2>
 <div class="grid">
-<a class="card" href="v2/" data-url="v2/">
+<a class="card" href="v2/">
   <span class="ico">🗒</span>
   <span class="body">
     <span class="t">v2 · 本地照片版（10 条，第 9 条已发）</span>
@@ -66,7 +72,7 @@
   </span>
   <span class="arrow">↗</span>
 </a>
-<a class="card" href="v1/" data-url="v1/">
+<a class="card" href="v1/">
   <span class="ico">🗒</span>
   <span class="body">
     <span class="t">v1 · AI 配图版（10 条）</span>
@@ -75,5 +81,9 @@
   <span class="arrow">↗</span>
 </a>
 </div>
-<footer>更新于 2026-11-13 13:30 · 华为云 DevBridge 隧道<br><code>amhfximg-8099</code> 页面 · <code>amhfximg-8300</code> 应用</footer>
+
+<footer>
+  静态托管于 GitHub Pages · <a href="https://eskyhero-star.github.io/eskyhero-site/">← 回作品集</a><br>
+  <code>eskyhero-site/labs</code> · 2026-11-13
+</footer>
 </div></body></html>
