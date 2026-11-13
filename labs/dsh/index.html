@@ -3,176 +3,56 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DSH 控制台 · 口令入口</title>
+<title>DSH 控制台 · 使用说明</title>
 <style>
   :root{color-scheme:light dark;}
   *{box-sizing:border-box;}
   body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
     background:#eef0f4;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
     color:#1f2430;padding:20px;}
-  .box{width:100%;max-width:400px;background:#fff;border:1px solid #e6e8ee;border-radius:16px;
+  .box{width:100%;max-width:460px;background:#fff;border:1px solid #e6e8ee;border-radius:16px;
     padding:26px 24px;box-shadow:0 8px 26px rgba(31,36,48,.08);}
   h1{font-size:17px;margin:0 0 6px;}
-  .lead{font-size:13px;color:#8a90a0;line-height:1.6;margin:0 0 16px;}
-  input{width:100%;padding:11px 13px;font-size:13px;border:1px solid #dfe3ec;border-radius:10px;
-    outline:none;font-family:ui-monospace,Menlo,Consolas,monospace;background:#fbfcfe;color:inherit;}
-  input:focus{border-color:#2f6fed;box-shadow:0 0 0 3px rgba(47,111,237,.12);background:#fff;}
-  .row{display:flex;gap:10px;margin-top:12px;}
-  button{padding:11px;font-size:14px;font-weight:600;border:0;border-radius:10px;cursor:pointer;transition:.15s;}
-  #go{flex:1;color:#fff;background:#2f6fed;}
-  #go:hover:not(:disabled){background:#2761d8;}
-  #go:disabled{background:#a9c0f0;cursor:progress;}
-  #open{flex:0 0 auto;padding:11px 14px;color:#44506b;background:#eef1f7;font-weight:500;}
-  #open:hover{background:#e2e7f2;}
-  #fetch{width:100%;margin-top:10px;padding:11px;font-size:13.5px;font-weight:600;
-    color:#2f6fed;background:#eef3fd;border:1px dashed #a9c0f0;border-radius:10px;cursor:pointer;}
-  #fetch:hover{background:#e2ebfc;}
-  .msg{margin-top:12px;font-size:13px;line-height:1.6;border-radius:10px;padding:10px 12px;display:none;}
-  .msg.err{display:block;background:#fdeeee;color:#c0392b;border:1px solid #f7d7d4;}
-  .msg.ok{display:block;background:#eef7ef;color:#227a3d;border:1px solid #d3ecd7;}
-  .msg.wait{display:block;background:#eef3fd;color:#2f6fed;border:1px solid #d9e4fa;}
-  details{margin-top:16px;font-size:12px;color:#98a0b0;line-height:1.7;}
-  summary{cursor:pointer;color:#7f8899;outline:none;}
+  .lead{font-size:13px;color:#8a90a0;line-height:1.7;margin:0 0 18px;}
+  h2{font-size:12px;font-weight:600;color:#8a90a0;letter-spacing:.5px;text-transform:uppercase;margin:18px 0 8px;}
+  p{font-size:13.5px;line-height:1.75;margin:0 0 10px;color:#3a4254;}
+  ol{margin:0;padding-left:18px;font-size:13.5px;line-height:1.9;color:#3a4254;}
   code{font-family:ui-monospace,Menlo,Consolas,monospace;background:#f2f4f9;padding:2px 5px;border-radius:4px;
-    font-size:11.5px;word-break:break-all;display:block;margin-top:6px;}
-  footer{margin-top:18px;text-align:center;font-size:12px;color:#b3b9c6;}
-  footer a{color:#93a0b8;text-decoration:none;}
+    font-size:12px;word-break:break-all;display:block;margin-top:6px;color:#2f6fed;}
+  .note{margin-top:16px;font-size:12.5px;line-height:1.7;background:#fff7ed;border:1px solid #fed7aa;
+    color:#9a3412;border-radius:10px;padding:10px 12px;}
+  footer{margin-top:20px;text-align:center;font-size:12px;color:#b3b9c6;}
+  footer a{color:#7f8899;text-decoration:none;}
   @media (prefers-color-scheme:dark){
     body{background:#14161c;color:#e6e8f0;}
     .box{background:#1c1f27;border-color:#2b2f3a;box-shadow:0 8px 26px rgba(0,0,0,.4);}
-    input{background:#151821;border-color:#333846;color:#e6e8f0;}
-    input:focus{background:#101319;}
-    #open{background:#262a35;color:#c3c9d8;}
-    #open:hover{background:#2f3441;}
-    .msg.err{background:#2b1a1a;color:#f0a49c;border-color:#4a2622;}
-    .msg.ok{background:#16261a;color:#8fd6a2;border-color:#26472f;}
-    .msg.wait{background:#161e2e;color:#9dbcfa;border-color:#22304a;}
-    code{background:#252a35;}
+    p,ol{color:#c3c9d8;}
+    code{background:#252a35;color:#8fb4ff;}
+    .note{background:#2b1e12;border-color:#513018;color:#f0b27a;}
   }
 </style>
 </head>
 <body>
 <div class="box">
   <h1>🧠 DSH 控制台</h1>
-  <p class="lead">粘贴访问口令，校验通过后自动进入。</p>
-  <input id="t" placeholder="粘贴口令（约 43 位）" autocomplete="off" spellcheck="false">
-  <div class="row">
-    <button id="go">进入控制台</button>
-    <button id="open" title="口令有效时在新标签打开">↗</button>
+  <p class="lead">DeepSeek Harness 是一个跑在你自己机器上的 AI 工作台。它带会话、文件读写和终端执行能力，因此<b>不适合公开挂在公网上</b>。</p>
+
+  <h2>为什么这里没有登录框</h2>
+  <p>原来的口令页依赖主机上的反向代理接口（<code>check</code> / <code>latest-token</code>）。这个页面现在托管在纯静态的 GitHub Pages 上，没有后端可调用，所以只保留使用说明。</p>
+
+  <h2>怎么在本机打开</h2>
+  <ol>
+    <li>在主机上运行 <code>dsh web</code></li>
+    <li>终端会打印一条带 token 的地址，直接点开</li>
+    <li>需要重新取口令时，执行下面这行，取最后一条</li>
+  </ol>
+  <code>grep -aoE "token=[A-Za-z0-9_-]+" ~/.dsh/logs/runtime.log | tail -1</code>
+
+  <div class="note">
+    安全提醒：这个服务能执行命令、读写文件。请只在本机或内网使用，不要为它配置公网域名；远程访问请走 SSH 隧道或 VPN。
   </div>
-  <button id="fetch" style="display:none">🔄 自动获取最新口令并进入</button>
-  <div class="msg" id="m"></div>
-  <details>
-    <summary>口令从哪来？</summary>
-    <p>dsh 每次重启都会换口令。在主机执行下面这行，取最后一条：</p>
-    <code>grep -aoE "token=[A-Za-z0-9_-]+" ~/.dsh/logs/runtime.log | tail -1</code>
-  </details>
+
   <footer><a href="../">← 返回网址集合</a></footer>
 </div>
-<script>
-(function () {
-  var TARGET = 'app/?token=';   // 同域名反代，避免跳到 3080 域名再弹一次安全警告页
-  var CHECK = 'check?token=';
-  var el = document.getElementById('t');
-  var btn = document.getElementById('go');
-  var openBtn = document.getElementById('open');
-  var fetchBtn = document.getElementById('fetch');
-  var msg = document.getElementById('m');
-  var busy = false;
-
-  function say(kind, text) {
-    msg.className = 'msg ' + kind;
-    msg.textContent = text;
-  }
-  function clearMsg() { msg.className = 'msg'; msg.textContent = ''; }
-  function reset() {
-    busy = false;
-    btn.disabled = false;
-    btn.textContent = '进入控制台';
-  }
-
-  function go() {
-    var tok = el.value.trim();
-    if (!tok) { say('err', '口令不能为空。'); el.focus(); return; }
-    if (busy) return;
-    busy = true;
-    btn.disabled = true;
-    btn.textContent = '校验中…';
-    clearMsg();
-
-    fetch(CHECK + encodeURIComponent(tok), { cache: 'no-store' })
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        if (d.ok) {
-          try { localStorage.setItem('dsh_token', tok); } catch (e) {}
-          say('ok', '口令有效，正在进入…');
-          location.href = TARGET + encodeURIComponent(tok);
-          return;
-        }
-        if (d.status === 401) {
-          try { localStorage.removeItem('dsh_token'); } catch (e) {}
-          say('err', '口令无效或已过期（401）。dsh 重启后口令会变，可点下方按钮自动获取最新口令。');
-          fetchBtn.style.display = 'block';
-        } else {
-          say('err', '校验失败（状态 ' + d.status + '），dsh 服务可能没在运行。');
-        }
-        reset();
-      })
-      .catch(function () {
-        say('err', '校验请求失败，检查网络后重试。');
-        reset();
-      });
-  }
-
-  fetchBtn.addEventListener('click', function () {
-    if (busy) return;
-    busy = true;
-    btn.disabled = true;
-    fetchBtn.disabled = true;
-    fetchBtn.textContent = '获取中…';
-    say('wait', '正在从服务器日志读取最新口令…');
-    fetch('latest-token', { cache: 'no-store' })
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        if (!d.ok || !d.token) {
-          say('err', '没取到口令（dsh 可能没在运行）。');
-          reset();
-          fetchBtn.disabled = false;
-          fetchBtn.textContent = '🔄 自动获取最新口令并进入';
-          return;
-        }
-        el.value = d.token;
-        say('wait', '已取到最新口令，正在校验进入…');
-        busy = false;
-        btn.disabled = false;
-        go();
-      })
-      .catch(function () {
-        say('err', '获取失败，检查网络后重试。');
-        reset();
-        fetchBtn.disabled = false;
-        fetchBtn.textContent = '🔄 自动获取最新口令并进入';
-      });
-  });
-
-  btn.addEventListener('click', go);
-  el.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
-  openBtn.addEventListener('click', function () {
-    var tok = el.value.trim();
-    if (!tok) { say('err', '口令不能为空。'); el.focus(); return; }
-    window.open(TARGET + encodeURIComponent(tok), '_blank', 'noopener');
-  });
-
-  var saved = '';
-  try { saved = localStorage.getItem('dsh_token') || ''; } catch (e) {}
-  if (saved) {
-    el.value = saved;
-    say('wait', '检测到上次保存的口令，正在校验…');
-    go();
-  } else {
-    el.focus();
-  }
-})();
-</script>
 </body>
 </html>
